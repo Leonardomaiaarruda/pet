@@ -5,12 +5,15 @@ import path from "path";
 
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import MainRoutes from './router/router.js';
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 dotenv.config();   
+
+import MainRoutes from './router/router.js';
+
+
+
 
 const server = express();
 server.set("view engine", "mustache"); // criação de template
@@ -20,13 +23,8 @@ server.use(express.static(path.join(__dirname, "../public")));
 
 server.use(MainRoutes);
 server.use((req, res)=>{
-    res.send('Pagina não encontrada');
+    res.render('pages/404');
 });
-
-//Rotas
-server.use('/', (res, req)=>{
-    res.send
-})
 
 
 server.listen(process.env.PORT);
